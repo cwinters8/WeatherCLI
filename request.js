@@ -6,15 +6,19 @@ const https = require('https');
  * @param {function} callback 
  */
 function request(url, callback) {
-    const request = https.get(url, response => {
-        let body = '';
-        response.on('data', data => {
-            body += data;
+    try {
+        const request = https.get(url, response => {
+            let body = '';
+            response.on('data', data => {
+                body += data;
+            });
+            response.on('end', () => {
+                callback(body);
+            });
         });
-        response.on('end', () => {
-            callback(body);
-        });
-    });
+    } catch (error) {
+        console.error(`Could not retrieve data from specified URL (${url})`);
+    }
 }
 
 module.exports.request = request;

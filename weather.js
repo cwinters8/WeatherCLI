@@ -6,11 +6,15 @@ const key = '0918d9944dd0f380a848983f6a024ae0';
  * @param {string} stringData 
  */
 function parseWeather(stringData) {
-    const json = JSON.parse(stringData);
-    const temp = json.main.temp;
-    const city = json.name;
-    const message = `Current temperature in ${city} is ${temp}F`;
-    console.log(message);
+    try {
+        const json = JSON.parse(stringData);
+        const temp = json.main.temp;
+        const city = json.name;
+        const message = `Current temperature in ${city} is ${temp}F`;
+        console.log(message);
+    } catch (error) {
+        console.error('Invalid location parameter');
+    }
 }
 
 /**

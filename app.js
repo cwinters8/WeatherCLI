@@ -1,5 +1,6 @@
 const weather = require('./weather');
 
 const args = process.argv;
-const location = args[2];
+let location = args.splice(2);
+location = location.join(' ');
 weather.get(location);
